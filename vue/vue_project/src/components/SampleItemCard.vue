@@ -1,6 +1,6 @@
 <template>
-  <div class="example-card">
-    <div class="example-card-text">{{ example.text }}</div>
+  <div class="sample-item-card">
+    <div class="sample-item-card-text">{{ sampleItem.text }}</div>
   </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   name: 'ExampleCard',
   components: {},
   props: {
-    example: {
+    sampleItem: {
       type: Object,
       default: () => {},
     },
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.example-card {
+.sample-item-card {
   position: relative;
   width: 300px;
   height: min-content;

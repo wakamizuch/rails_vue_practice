@@ -1,47 +1,47 @@
 <template>
-  <div class="examples-page">
+  <div class="sample-page">
     <div class="title">これはサンプルページです</div>
     <router-link :to="{ name: 'TopPage' }"> トップページに戻る</router-link>
-    <div class="example-form">
-      <input class="input-example-text" type="text" v-model="inputText">
-      <div class="add-button" @click="addExample">追加</div>
+    <div class="sample-item-form">
+      <input class="input-sample-item-text" type="text" v-model="inputText">
+      <div class="add-button" @click="addSampleItem">追加</div>
     </div>
-    <div class="example-cards">
-      <ExampleCard
-        v-for="(example, index) in examples"
+    <div class="sample-item-cards">
+      <SampleItemCard
+        v-for="(sampleItem, index) in sampleItems"
         :key="index"
-        :example="example"
+        :sampleItem="sampleItem"
       />
     </div>
   </div>
 </template>
 
 <script>
-import ExampleCard from '@/components/ExampleCard'
+import SampleItemCard from '@/components/SampleItemCard'
 
 export default {
-  name: 'ExamplesPage',
+  name: 'SamplePage',
   components: {
-    ExampleCard,
+    SampleItemCard,
   },
   data() {
     return {
-      examples: [],
+      sampleItems: [],
       inputText: '',
     };
   },
   created() {
-    this.loadExamples();
+    this.loadSampleItems();
   },
   methods: {
-    async loadExamples() {
-      this.examples =  await this.$store.dispatch('loadExamples');
+    async loadSampleItems() {
+      this.sampleItems =  await this.$store.dispatch('loadSampleItems');
     },
-    async addExample() {
+    async addSampleItem() {
       if (!this.inputText) {
       return window.alert('テキストを入力してください');
       }
-      await this.$store.dispatch('addExample', { text: this.inputText });
+      await this.$store.dispatch('addSampleItem', { text: this.inputText });
       this.inputText = '';
     },
   }
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.examples-page {
+.sample-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,12 +64,12 @@ export default {
     font-weight: bold;
   }
 
-  .example-form {
+  .sample-item-form {
     display: flex;
     gap: 36px;
     align-items: center;
 
-    .input-example-text {
+    .input-sample-item-text {
       height: 36px;
       width: 300px;
       font-size: 16px;
@@ -97,7 +97,7 @@ export default {
     }
   }
 
-  .example-cards {
+  .sample-item-cards {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;

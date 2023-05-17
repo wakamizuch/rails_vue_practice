@@ -1,4 +1,4 @@
-class ExamplesController < ApplicationController
+class SampleItemsController < ApplicationController
   ITEMS_DATA = [
     { text: 'これはRails側のデータです' },
     { text: 'API経由で取得しています' },
@@ -7,17 +7,19 @@ class ExamplesController < ApplicationController
     { text: 'Hoge hoge' },
     { text: 'Matcher Inc.' },
   ]
+
+  
   def index
-    render_success examples: ITEMS_DATA
+    render_success sample_items: ITEMS_DATA
   end
 
   def create
-    puts example_params
-    render_success example: { text: example_params[:text] }
+    puts sample_item_params
+    render_success sample_item: { text: sample_item_params[:text] }
   end
 
   private
-  def example_params
-    params.require(:example).permit(:text)
+  def sample_item_params
+    params.require(:sample_item).permit(:text)
   end
 end

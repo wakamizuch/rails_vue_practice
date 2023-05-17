@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TopPage from '@/views/TopPage'
-import ExamplesPage from '@/views/ExamplesPage'
+import SamplePage from '@/views/SamplePage'
 
 Vue.use(VueRouter)
 
@@ -12,9 +12,9 @@ const routes = [
     component: TopPage
   },
   {
-    path: '/examples',
-    name: 'ExamplesPage',
-    component: ExamplesPage
+    path: '/sample',
+    name: 'SamplePage',
+    component: SamplePage
   },
 ]
 

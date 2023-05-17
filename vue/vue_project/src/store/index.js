@@ -14,20 +14,22 @@ export default new Vuex.Store({
   actions: {
     async loadExamples({commit}) {
       const res = await api.get('examples');
-      commit('setExamples', { examples: res.data.items });
-      return res.data.items;
+      const examples = res.data.examples;
+      commit('setExamples', { examples });
+      return examples;
     },
     async addExample({commit}, { text }) {
       const res = await api.post('examples', { example: { text: text }});
-      commit('addExamples', { example: res.data.item });
-      return res.data.item;
+      const example = res.data.example;
+      commit('addExample', { example });
+      return example;
     },
   },
   mutations: {
     setExamples(state, { examples }) {
       state.examples = examples;
     },
-    addExamples(state, { example }) {
+    addExample(state, { example }) {
       state.examples.push(example);
     },
   },

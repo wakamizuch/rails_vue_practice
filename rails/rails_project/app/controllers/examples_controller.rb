@@ -8,12 +8,12 @@ class ExamplesController < ApplicationController
     { text: 'Matcher Inc.' },
   ]
   def index
-    render_success items: ITEMS_DATA
+    render_success examples: ITEMS_DATA
   end
 
   def create
     puts example_params
-    render_success item: { text: example_params[:text] }
+    render_success example: { text: example_params[:text] }
   end
 
   private

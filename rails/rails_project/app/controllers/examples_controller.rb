@@ -1,11 +1,11 @@
 class ExamplesController < ApplicationController
   ITEMS_DATA = [
     { text: 'これはRails側のデータです' },
-    { text: 'APIで取得しています' },
+    { text: 'API経由で取得しています' },
     { text: '取得したこれらのデータはstoreに保存します' },
     { text: 'Hello World!' },
     { text: 'Hoge hoge' },
-    { text: 'Here is Matcher Inc.' },
+    { text: 'Matcher Inc.' },
   ]
   def index
     render_success items: ITEMS_DATA

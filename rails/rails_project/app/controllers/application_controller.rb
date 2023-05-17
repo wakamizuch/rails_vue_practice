@@ -6,6 +6,6 @@ class ApplicationController < ActionController::API
   protect_from_forgery with: :exception
 
   def not_found
-    raise ActionController::RoutingError, 'This API endpoint was not found'
+    raise ActionController::RoutingError, 'The API endpoint was not found'
   end
 end

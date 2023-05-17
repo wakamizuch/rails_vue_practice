@@ -15,4 +15,4 @@ services:
       - /vue/vue_project/node_modules/
     ports:
       - "8080:8080"
-    command: bash -lc "npm run serve"
+    command: bash -lc "npm install && npm run serve"

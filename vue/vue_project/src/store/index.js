@@ -18,7 +18,6 @@ export default new Vuex.Store({
       return res.data.items;
     },
     async addExample({commit}, { text }) {
-      console.log(api.defaults.headers)
       const res = await api.post('examples', { example: { text: text }});
       commit('addExamples', { example: res.data.item });
       return res.data.item;

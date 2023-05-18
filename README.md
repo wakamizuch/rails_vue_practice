@@ -4,9 +4,11 @@
 始める場合は、Dockerが使用できる環境を準備してから **環境構築** のステップを踏んでください。
 
 ## 環境構築
+まずはこのプロジェクトをForkします。<br>
+自分のアカウントにリポジトリがコピーされたら、それをCloneします。
 ```bash
-# このプロジェクトをクローンします
-$ git clone git@github.com:matcher-inc/rails_vue_practice.git
+# リポジトリをClone
+$ git clone git@github.com:{Your Account Name}/rails_vue_practice.git
 $ cd rails_vue_practice
 
 # Dockerのbuildを実行します

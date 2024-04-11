@@ -3,16 +3,20 @@
     <div class="title">これはサンプルページです</div>
     <router-link :to="{ name: 'TopPage' }"> トップページに戻る</router-link>
     <div class="sample-item-form">
+      <!--(追加の方)a1.クリックされると、addSampleItemという関数が発動されます-->
       <input class="input-sample-item-text" type="text" v-model="inputText">
       <div class="add-button" @click="addSampleItem">追加</div>
     </div>
     <div class="sample-item-cards">
+      <!--  1.まず in sampleItems の sampleItems が何かを辿る-->
+      <!-- 10. SampleItemCardというコンポーネントをとってきて、全部書きます-->
       <SampleItemCard
         v-for="(sampleItem, index) in sampleItems"
         :key="index"
         :sampleItem="sampleItem"
       />
     </div>
+    
   </div>
 </template>
 
@@ -31,17 +35,22 @@ export default {
     };
   },
   created() {
+    //  2.create()により、loadSampleItems()が実行される
     this.loadSampleItems();
   },
   methods: {
     async loadSampleItems() {
+      // 3.ampleItemsに、'loadSampleItems'の実行が行われる
       this.sampleItems =  await this.$store.dispatch('loadSampleItems');
+      // 9.sampleItemsがreturnされます。そして、ここの、つまりthis.sampleItemsにsampleItemsが入ります
     },
+    //a2.からじゃなければ、'addSampleItem'を行う、その際に this.inputTextを text として引き渡す
     async addSampleItem() {
       if (!this.inputText) {
       return window.alert('テキストを入力してください');
       }
       await this.$store.dispatch('addSampleItem', { text: this.inputText });
+
       this.inputText = '';
     },
   }

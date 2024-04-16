@@ -1,16 +1,10 @@
 <template>
-  <div class="task-page">
-    <div class="tab">
+  <div class="my-page">
+    <div>
       <LinkList />
     </div>
 
-    <div class="inputForm">
-      <input type="button" value="作成" @click="createTask" />
-      <textarea v-model="inputText" placeholder="タスク内容を書きましょう">
-      </textarea>
-    </div>
-
-    <p>タスクページです</p>
+    <p>タスクページ一覧です</p>
     <div class="show_all">
       <TaskCard
         v-for="(taskCard, index) in taskCards"
@@ -25,7 +19,7 @@ import TaskCard from "@/components/TaskCard";
 import LinkList from "@/components/LinkList";
 
 export default {
-  name: "TaskPage",
+  name: "MyPage",
   components: {
     TaskCard,
     LinkList,
@@ -37,18 +31,15 @@ export default {
     };
   },
   created() {
-    this.loadTaskCards();
+    this.loadMyTaskCards();
   },
   methods: {
-    async loadTaskCards() {
-      this.taskCards = await this.$store.dispatch("loadTaskCards");
-    },
-    async createTask() {
-      //userId =
-      console.log("dfdasf");
-      await this.$store.dispatch("createTask", {
-        userId: this.$store.getters.userId,
-        text: this.inputText,
+    async loadMyTaskCards() {
+      const userId = this.$store.getters.userId;
+      console.log(JSON.stringify(userId));
+      console.log("userIdは: " + userId);
+      this.taskCards = await this.$store.dispatch("loadMyTaskCards", {
+        user_id: userId,
       });
     },
   },
@@ -57,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 //# { visibility: hidden; }
-.task-page {
+.my-page {
   .title {
     font-size: 36px;
     font-weight: bold;
@@ -86,9 +77,8 @@ export default {
     }
   }
   .tab {
-    margin: 10px;
-    font-size: 25px;
     text-align: right;
+    font-size: 25px;
   }
   textarea {
     width: 200px; /* 横幅 */

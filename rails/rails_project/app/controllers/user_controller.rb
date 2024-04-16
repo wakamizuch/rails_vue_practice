@@ -26,9 +26,11 @@ class UserController < ApplicationController
     #end
     @user = UserInfo.find_by(email: user_params_login[:email])
     if !@user
+      # emailに入っていることに注意
       @user = UserInfo.find_by(name: user_params_login[:email])
+      puts "成功しました"
     end
-    puts "成功しました"
+    
     # if文の条件を&&とauthenticateメソッドを用いる
     if @user && @user.authenticate(user_params_login[:password])
       puts "ログインできました"

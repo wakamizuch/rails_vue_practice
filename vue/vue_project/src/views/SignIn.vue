@@ -66,8 +66,8 @@ export default {
       //alert("SignIn:" + res);
       //alert("SignIn:" + this.$store.state.userId);
       //alert("SignIn:" + this.$store.state.isLoggedIn);
-      if(this.$store.getters.isLoggedIn){
-        this.$router.push({name: "TopPage"});
+      if (this.$store.getters.isLoggedIn) {
+        this.$router.push({ name: "TopPage" });
       }
     },
   },

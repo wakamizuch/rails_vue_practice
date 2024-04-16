@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     sampleItems: [],
     isLoggedIn: false,
-    userId: -1,
+    userId: null,
   },
   getters: {
     sampleItems: (state) => state.sampleItems,
@@ -27,6 +27,7 @@ export default new Vuex.Store({
       commit("setSampleItems", { sampleItems });
       return sampleItems;
     },
+
     //a3.resは,apiのpostの'sample_items'からもらう
     async addSampleItem({ commit }, { text }) {
       const res = await api.post("sample_items", {
@@ -44,11 +45,11 @@ export default new Vuex.Store({
       console.log(res.data);
       const link_to = res.data.link_to;
       alert("データ:" + link_to.name);
-      return link_to;
       //console.log(res)
-      //const sampleItem = res.data.sample_item;
+      const sampleItem = res.data.sample_item;
       //a6.mutationsの'addSampleItem'を実行します
-      //commit("addSampleItem", { sampleItem });
+      commit("addSampleItem", { sampleItem });
+      return link_to;
       //return sampleItem;
     },
     async login({ commit }, { inputEmail, inputPassword }) {
@@ -57,15 +58,32 @@ export default new Vuex.Store({
       });
       console.log(res.data);
       const userId = res.data.userId;
-      //const link_to = res.data.link_to;
-      //alert("データ:" + userId);
-      //alert("データ:" + typeof(userId));
       if (userId >= 0) {
         alert("コミット");
         alert(userId);
         commit("setIsLoggedIn", { userId });
       }
       return userId;
+    },
+    async loadMyTaskCards({ commit }, { user_id }) {
+      console.log(JSON.stringify({ user: { user_id: user_id } }));
+      const res = await api.get(`load_my_task_cards/${user_id}`);
+      return res.data.tasks;
+    },
+    async loadTaskCards() {
+      const res = await api.get("load_task_cards");
+      return res.data.tasks;
+    },
+    async createTask({ commit }, { userId, text }) {
+      const res = await api.post("create_task", {
+        task: { user_id: userId, text: text },
+      });
+    },
+    async updateTaskFlag({ commit }, { task_id }) {
+      console.log(task_id)
+      const res = await api.post("update_task_flag", {
+        task: {  task_id: task_id },
+      });
     },
   },
   mutations: {

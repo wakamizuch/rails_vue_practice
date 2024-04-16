@@ -2,7 +2,7 @@
   <div class="top-page">
     <div class="title">トップページ</div>
     <div class="tab">
-      <router-link :to="{ name: 'SamplePage' }"> Top </router-link>
+      <router-link :to="{ name: 'TopPage' }"> Top </router-link>
       <router-link
         :to="{ name: 'SignUp' }"
         v-if="this.$store.getters.isLoggedIn == false"

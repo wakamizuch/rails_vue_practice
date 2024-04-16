@@ -5,6 +5,7 @@ import SamplePage from "@/views/SamplePage";
 import SignUp from "@/views/SignUp";
 import SignIn from "@/views/SignIn";
 import TaskPage from "@/views/TaskPage";
+import MyPage from "@/views/MyPage";
 import { START_LOCATION } from "vue-router";
 
 Vue.use(VueRouter);
@@ -47,7 +48,14 @@ const routes = [
     path: "/tasks",
     name: "TaskPage",
     component: TaskPage,
-    beforeEnter: denyDirectAccess,
+    //beforeEnter: denyDirectAccess,
+  },
+
+  {
+    path: "/my_page",
+    name: "MyPage",
+    component: MyPage,
+    //beforeEnter: denyDirectAccess,
   },
 ];
 

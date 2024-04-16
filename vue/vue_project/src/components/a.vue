@@ -1,12 +1,15 @@
 <template>
   <div class="sample-item-card">
-    <div class="sample-item-card-text">{{ sampleItem.text }}</div>
+    <div class="task-card-name">{{ taskCard.name }}</div>
+    <div class="task-card-text">{{ taskCard.text }}</div>
+    <input type="checkbox" id="checkbox-name">
+    <label for="checkbox-name">チェックボックス</label>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ExampleCard",
+  name: 'ExampleCard',
   components: {},
   props: {
     sampleItem: {
@@ -14,8 +17,9 @@ export default {
       default: () => {},
     },
   },
-};
+}
 </script>
+
 
 <style lang="scss" scoped>
 .sample-item-card {

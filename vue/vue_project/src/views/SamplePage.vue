@@ -4,7 +4,7 @@
     <router-link :to="{ name: 'TopPage' }"> トップページに戻る</router-link>
     <div class="sample-item-form">
       <!--(追加の方)a1.クリックされると、addSampleItemという関数が発動されます-->
-      <input class="input-sample-item-text" type="text" v-model="inputText">
+      <input class="input-sample-item-text" type="text" v-model="inputText" />
       <div class="add-button" @click="addSampleItem">追加</div>
     </div>
     <div class="sample-item-cards">
@@ -16,22 +16,21 @@
         :sampleItem="sampleItem"
       />
     </div>
-    
   </div>
 </template>
 
 <script>
-import SampleItemCard from '@/components/SampleItemCard'
+import SampleItemCard from "@/components/SampleItemCard";
 
 export default {
-  name: 'SamplePage',
+  name: "SamplePage",
   components: {
     SampleItemCard,
   },
   data() {
     return {
       sampleItems: [],
-      inputText: '',
+      inputText: "",
     };
   },
   created() {
@@ -41,20 +40,20 @@ export default {
   methods: {
     async loadSampleItems() {
       // 3.ampleItemsに、'loadSampleItems'の実行が行われる
-      this.sampleItems =  await this.$store.dispatch('loadSampleItems');
+      this.sampleItems = await this.$store.dispatch("loadSampleItems");
       // 9.sampleItemsがreturnされます。そして、ここの、つまりthis.sampleItemsにsampleItemsが入ります
     },
     //a2.からじゃなければ、'addSampleItem'を行う、その際に this.inputTextを text として引き渡す
     async addSampleItem() {
       if (!this.inputText) {
-      return window.alert('テキストを入力してください');
+        return window.alert("テキストを入力してください");
       }
-      await this.$store.dispatch('addSampleItem', { text: this.inputText });
+      await this.$store.dispatch("addSampleItem", { text: this.inputText });
 
-      this.inputText = '';
+      this.inputText = "";
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss" scoped>

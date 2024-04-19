@@ -3,14 +3,21 @@
     <div class="tab">
       <LinkList />
     </div>
+    <!--<p>{{ this.$store.getters["taskCards"] }}</p> -->
+    <p>{{ this.$store.getters["fight/fightTaskList"] }}</p>
+    <p>↑fightしているtaskId</p>
 
     <div class="inputForm">
       <input type="button" value="作成" @click="createTask" />
       <textarea v-model="inputText" placeholder="タスク内容を書きましょう">
       </textarea>
     </div>
-
+    <div>
+      <p>{{ followedList }}</p>
+      <p>↑フォローしているuserId</p>
+    </div>
     <p>タスクページです</p>
+    <p>ようこそ {{ this.$store.getters.userId }} 番さん</p>
     <div class="show_all">
       <TaskCard
         v-for="(taskCard, index) in taskCards"
@@ -32,20 +39,33 @@ export default {
   },
   data() {
     return {
-      taskCards: [],
+      fightTaskList: this.$store.getters["fight/fightTaskList"],
+      taskCards: this.$store.getters.taskCards,
       inputText: "",
+      followedList: this.$store.getters.followedList,
     };
   },
   created() {
     this.loadTaskCards();
+    this.loadFollowedList();
+    this.loadFightTaskList();
   },
   methods: {
+    async loadFollowedList() {
+      console.log("ロードされました(FollowedList)");
+      const userId = this.$store.getters.userId;
+      await this.$store.dispatch("loadFollowedList", { userId: userId });
+    },
+    async loadFightTaskList() {
+      console.log("ロードされました(FightTaskList)");
+      const userId = this.$store.getters.userId;
+      await this.$store.dispatch("fight/loadFightTaskList", { userId: userId });
+    },
     async loadTaskCards() {
-      this.taskCards = await this.$store.dispatch("loadTaskCards");
+      console.log("ロードされました(LoadTaskList)");
+      this.taskCards = await this.$store.dispatch("loadTaskCards",{});
     },
     async createTask() {
-      //userId =
-      console.log("dfdasf");
       await this.$store.dispatch("createTask", {
         userId: this.$store.getters.userId,
         text: this.inputText,

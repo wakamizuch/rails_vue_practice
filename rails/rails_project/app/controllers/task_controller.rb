@@ -39,12 +39,33 @@ class TaskController < ApplicationController
   
   def load_task_cards
     
-    tasks = Task.all.order(created_at: :desc)
-    pp "ロードします"
-    #pp tasks
+    tasks = Task.all.order(created_at: :desc).limit(15)
+    pp "全てのタスクのロードします"
+    pp tasks
     render_success tasks: tasks
   end
 
+  def update_fight_num
+    puts "fight_numの変更をします"
+    pp fight_params
+    task = Task.find_by(
+      id:fight_params[:task_id],
+    )
+    if fight_params[:fight_now]
+      if task.update(fight_num:task.fight_num+=1)
+        render_success task:task
+      else
+        render_error
+      end
+    else 
+      if task.update(fight_num:task.fight_num-=1)
+        render_success
+      else
+        render_error task:task
+      end
+    end
+
+  end
 
   private
   def task_params
@@ -66,5 +87,11 @@ class TaskController < ApplicationController
     #params.require.permit(:user_id)
     params.permit(:user_id)
   end
+
+  private 
+  def fight_params
+    params.require(:fight).permit(:task_id ,:fight_now)
+  end
+
 end
   

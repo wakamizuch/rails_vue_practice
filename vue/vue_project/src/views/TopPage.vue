@@ -24,6 +24,7 @@
     </div>
     <router-link :to="{ name: 'SamplePage' }">サンプルページを見る</router-link>
     <p>userIdの確認: {{ this.$store.getters.userId }}</p>
+    <p>ログインの確認: {{ this.$store.getters.isLoggedIn }}</p>
   </div>
 </template>
 

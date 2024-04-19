@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_04_16_045355) do
+ActiveRecord::Schema.define(version: 2024_04_18_155513) do
+
+  create_table "fights", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "task_id"
+    t.boolean "fight_now", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.boolean "follow_now"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.integer "user_id"
@@ -19,6 +35,7 @@ ActiveRecord::Schema.define(version: 2024_04_16_045355) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_task_finished", default: false
+    t.integer "fight_num", default: 0
   end
 
   create_table "user_infos", force: :cascade do |t|
